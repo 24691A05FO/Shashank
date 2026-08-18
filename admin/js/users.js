@@ -1,6 +1,6 @@
 // JavaScript for Pokemon Nexus User Management Dashboard
 
-const API_BASE_URL = "http://127.0.0.1:5000/api";
+const API_BASE_URL = "https://pokemon-nexus-api.onrender.com/api";
 
 // 1. JWT Authentication & Role Guard Check
 function checkAuth() {

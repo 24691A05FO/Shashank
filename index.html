@@ -173,7 +173,7 @@ body{width:100vw;height:100vh;overflow:hidden;background:#000;font-family:Poppin
 const loadingScreen=document.getElementById("loadingScreen"),authScreen=document.getElementById("authScreen"),homeScreen=document.getElementById("homeScreen"),percent=document.getElementById("percent"),enterBtn=document.getElementById("enterBtn"),loadingText=document.getElementById("loadingText");
 for(let i=0;i<70;i++){const s=document.createElement("span");s.className="spark";s.style.left=Math.random()*100+"vw";s.style.animationDuration=(5+Math.random()*8)+"s";s.style.animationDelay=Math.random()*5+"s";document.body.appendChild(s);}
 let value=0;const timer=setInterval(()=>{value++;percent.textContent=value+"%";if(value>=100){clearInterval(timer);loadingText.textContent="Adventure Ready!";enterBtn.classList.add("show");}},80);
-const API_BASE_URL="http://127.0.0.1:5000/api";
+const API_BASE_URL="https://pokemon-nexus-api.onrender.com/api";
 const authMessage=document.getElementById("authMessage");
 enterBtn.onclick=()=>{loadingScreen.classList.add("hide");authScreen.classList.add("show");};
 function setAuthMessage(message,isError=false){authMessage.textContent=message;authMessage.style.color=isError?"#ff6b6b":"#ffd86b";}
