@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: pokemon-nexus-api
+    runtime: python
+    plan: free
+    rootDir: backend
+    buildCommand: |
+      pip install -r requirements.txt && python manage.py collectstatic --noinput
+    startCommand: |
+      python manage.py migrate && gunicorn pokemon_backend.wsgi:application --bind 0.0.0.0:$PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.3
+      - key: DEBUG
+        value: False
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ALLOWED_HOSTS
+        value: localhost,127.0.0.1,pokemon-nexus-api.onrender.com

@@ -197,7 +197,7 @@
       width: 32px;
       height: 32px;
       border-radius: 50%;
-      background: #ffd86b url("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png") no-repeat center/contain;
+      background: #ffd86b url("https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/official-artwork/25.png") no-repeat center/contain;
       border: 1.5px solid var(--yellow);
     }
 
@@ -611,7 +611,7 @@
       align-items: start;
     }
 
-    @media (max-width: 980px) {
+    @media (max-width: 1200px) {
       .main-grid-layout {
         grid-template-columns: 1fr;
       }
@@ -621,6 +621,7 @@
       display: flex;
       flex-direction: column;
       gap: 20px;
+      min-width: 0;
     }
 
     /* Controls bar styling */
@@ -725,6 +726,7 @@
       border: 1.5px solid rgba(255, 255, 255, 0.12);
       border-radius: var(--radius-card);
       overflow-x: auto;
+      max-width: 100%;
       backdrop-filter: blur(8px);
       box-shadow: 0 12px 36px rgba(0,0,0,0.5);
     }
@@ -1151,9 +1153,10 @@
     }
 
     .fame-pkmn-icon {
-      width: 24px;
-      height: 24px;
+      width: 28px;
+      height: 28px;
       object-fit: contain;
+      flex-shrink: 0;
     }
 
     /* Achievements list row styling */
@@ -1708,8 +1711,8 @@
               <span class="fame-trainer-name">Trainer Lance</span>
               <span style="font-size: 10px; color: var(--yellow);">Champion 2024</span>
               <div class="fame-pokemon-row">
-                <img class="fame-pkmn-icon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/149.png" alt="Dragonite">
-                <img class="fame-pkmn-icon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png" alt="Charizard">
+                <img class="fame-pkmn-icon" src="https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/official-artwork/149.png" alt="Dragonite" onerror="this.onerror=null; this.src='https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/149.png';">
+                <img class="fame-pkmn-icon" src="https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/official-artwork/6.png" alt="Charizard" onerror="this.onerror=null; this.src='https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/6.png';">
               </div>
             </div>
           </div>
@@ -1719,8 +1722,8 @@
               <span class="fame-trainer-name">Trainer Cynthia</span>
               <span style="font-size: 10px; color: var(--yellow);">Champion 2025</span>
               <div class="fame-pokemon-row">
-                <img class="fame-pkmn-icon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/445.png" alt="Garchomp">
-                <img class="fame-pkmn-icon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/448.png" alt="Lucario">
+                <img class="fame-pkmn-icon" src="https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/official-artwork/445.png" alt="Garchomp" onerror="this.onerror=null; this.src='https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/445.png';">
+                <img class="fame-pkmn-icon" src="https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/official-artwork/448.png" alt="Lucario" onerror="this.onerror=null; this.src='https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/448.png';">
               </div>
             </div>
           </div>
@@ -2154,10 +2157,10 @@
             </svg>
           ` : ''}
           <div class="podium-badge">${rank}</div>
-          <div class="podium-avatar-wrapper" style="background-image: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${trainer.avatarSeed}.png')"></div>
+          <div class="podium-avatar-wrapper" style="background-image: url('https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/official-artwork/${trainer.avatarSeed}.png')"></div>
           <h3 class="podium-name">${trainer.name}</h3>
           <span class="podium-level-tag">LV ${trainer.level} — ${trainer.tier}</span>
-          <img class="podium-pokemon-art" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${trainer.avatarSeed}.png" alt="Mascot">
+          <img class="podium-pokemon-art" src="https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/official-artwork/${trainer.avatarSeed}.png" alt="Mascot">
           
           <div class="podium-stats-list">
             <div class="podium-stat-item">XP Points: <b>${trainer.xp.toLocaleString()}</b></div>
@@ -2223,7 +2226,7 @@
             </div>
           </td>
           <td>
-            <div class="table-avatar-cell" style="background-image: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${trainer.avatarSeed}.png')"></div>
+            <div class="table-avatar-cell" style="background-image: url('https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/official-artwork/${trainer.avatarSeed}.png')"></div>
           </td>
           <td class="table-name-cell">${trainer.name}</td>
           <td>LV ${trainer.level}</td>
@@ -2241,7 +2244,7 @@
           <td>${trainer.region}</td>
           <td><span class="tier-badge tier-${trainer.tier.toLowerCase()}">${trainer.tier}</span></td>
           <td>
-            <img class="table-pkmn-icon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${trainer.avatarSeed}.png" alt="PKMN">
+            <img class="table-pkmn-icon" src="https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/official-artwork/${trainer.avatarSeed}.png" alt="PKMN">
           </td>
         `;
 
@@ -2278,7 +2281,7 @@
       const trainer = dbTrainers.find(x => x.id === trainerId);
       if (!trainer) return;
 
-      document.getElementById("details-avatar").style.backgroundImage = `url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${trainer.avatarSeed}.png')`;
+      document.getElementById("details-avatar").style.backgroundImage = `url('https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/official-artwork/${trainer.avatarSeed}.png')`;
       document.getElementById("details-name").textContent = trainer.name;
       document.getElementById("details-tier").textContent = trainer.tier;
       document.getElementById("details-level-badge").textContent = `LV ${trainer.level}`;
@@ -2297,7 +2300,7 @@
         const match = pokemonList.find(p => p.name === pkmn.name) || { id: 25 };
         return `
           <div class="roster-pkmn-frame" title="${pkmn.name}">
-            <img class="roster-pkmn-sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${match.id}.png" alt="PKMN">
+            <img class="roster-pkmn-sprite" src="https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/official-artwork/${match.id}.png" alt="PKMN">
             <div class="roster-pkmn-lvl-badge">LV ${pkmn.lvl}</div>
           </div>
         `;
@@ -2320,7 +2323,7 @@
         item.className = `timeline-item ${isWin ? 'win' : 'loss'}`;
         item.innerHTML = `
           <div style="display:flex; align-items:center; gap:8px;">
-            <div style="width:20px; height:20px; border-radius:50%; background:url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${opponentAvatar}.png') center/cover; border:1px solid rgba(255,255,255,0.2)"></div>
+            <div style="width:20px; height:20px; border-radius:50%; background:url('https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/official-artwork/${opponentAvatar}.png') center/cover; border:1px solid rgba(255,255,255,0.2)"></div>
             <span>vs ${opponentName} (${time})</span>
           </div>
           <b style="color: ${isWin ? 'var(--green)' : 'var(--red)'}">${isWin ? 'WIN' : 'LOSS'}</b>
@@ -2364,39 +2367,118 @@
 
     function drawProgressChart() {
       const canvas = document.getElementById("progressChart");
+      if (!canvas) return;
       const ctx = canvas.getContext("2d");
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      ctx.strokeStyle = "rgba(255,255,255,0.06)";
-      ctx.lineWidth = 1;
-      for (let i = 0; i < 4; i++) {
-        const y = 30 + i * 40;
-        ctx.beginPath();
-        ctx.moveTo(10, y);
-        ctx.lineTo(290, y);
-        ctx.stroke();
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width || 600;
+      canvas.height = rect.height || 180;
+      
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const trainer = dbTrainers.find(x => x.id === selectedTrainerId);
+      if (!trainer) {
+        ctx.fillStyle = "rgba(255, 255, 255, 0.4)";
+        ctx.font = "13px Poppins, sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText("No season graph data available", canvas.width / 2, canvas.height / 2);
+        return;
       }
 
-      // Graph curves
+      const currentRank = dbTrainers.findIndex(x => x.id === trainer.id) + 1;
+      const rankVal = currentRank > 0 ? currentRank : 50;
+
+      let points = [];
+      if (rankVal === 1) {
+        points = [4, 2, 3, 1];
+      } else {
+        points = [
+          Math.min(110, rankVal + 15),
+          Math.min(110, rankVal + 8),
+          Math.max(1, rankVal - 2),
+          rankVal
+        ];
+      }
+
+      const paddingLeft = 60;
+      const paddingRight = 45;
+      const paddingTop = 25;
+      const paddingBottom = 35;
+
+      const chartWidth = canvas.width - paddingLeft - paddingRight;
+      const chartHeight = canvas.height - paddingTop - paddingBottom;
+
+      const minRank = Math.max(1, Math.min(...points) - 5);
+      const maxRank = Math.min(110, Math.max(...points) + 5);
+
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
+      ctx.lineWidth = 1;
+      ctx.fillStyle = "rgba(255, 255, 255, 0.55)";
+      ctx.font = "10px Poppins, sans-serif";
+      ctx.textAlign = "right";
+      ctx.textBaseline = "middle";
+
+      const gridCount = 3;
+      for (let i = 0; i <= gridCount; i++) {
+        const y = paddingTop + (i / gridCount) * chartHeight;
+        ctx.beginPath();
+        ctx.moveTo(paddingLeft, y);
+        ctx.lineTo(canvas.width - paddingRight, y);
+        ctx.stroke();
+
+        const rankAtY = Math.round(minRank + (i / gridCount) * (maxRank - minRank));
+        ctx.fillText("Rank " + rankAtY, paddingLeft - 10, y);
+      }
+
+      ctx.textAlign = "center";
+      ctx.textBaseline = "top";
+      const weeks = ["Week 1", "Week 2", "Week 3", "Week 4"];
+      const xCoords = [];
+      for (let i = 0; i < 4; i++) {
+        const x = paddingLeft + (i / 3) * chartWidth;
+        xCoords.push(x);
+        ctx.fillText(weeks[i], x, canvas.height - paddingBottom + 10);
+      }
+
+      const yCoords = points.map(p => {
+        if (maxRank === minRank) return paddingTop + chartHeight / 2;
+        return paddingTop + ((p - minRank) / (maxRank - minRank)) * chartHeight;
+      });
+
       ctx.strokeStyle = "var(--yellow)";
       ctx.lineWidth = 3.5;
+      ctx.shadowColor = "rgba(255, 203, 5, 0.4)";
+      ctx.shadowBlur = 10;
       ctx.beginPath();
-      ctx.moveTo(15, 120);
-      
-      // Dynamic curves depending on tab
-      if (selectedSeason === "daily") {
-        ctx.bezierCurveTo(90, 80, 180, 100, 280, 50);
-      } else if (selectedSeason === "weekly") {
-        ctx.bezierCurveTo(60, 140, 190, 20, 280, 40);
-      } else {
-        ctx.bezierCurveTo(80, 110, 150, 40, 280, 30);
+      ctx.moveTo(xCoords[0], yCoords[0]);
+      for (let i = 1; i < 4; i++) {
+        const xc = (xCoords[i - 1] + xCoords[i]) / 2;
+        const yc = (yCoords[i - 1] + yCoords[i]) / 2;
+        ctx.quadraticCurveTo(xCoords[i - 1], yCoords[i - 1], xc, yc);
       }
+      ctx.lineTo(xCoords[3], yCoords[3]);
       ctx.stroke();
 
-      ctx.fillStyle = "#fff";
-      ctx.beginPath();
-      ctx.arc(280, 30, 5, 0, Math.PI * 2);
-      ctx.fill();
+      ctx.shadowBlur = 0;
+
+      for (let i = 0; i < 4; i++) {
+        ctx.fillStyle = "var(--yellow)";
+        ctx.beginPath();
+        ctx.arc(xCoords[i], yCoords[i], 5.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = "#0f172a";
+        ctx.beginPath();
+        ctx.arc(xCoords[i], yCoords[i], 2.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = "#fff";
+        ctx.font = "bold 10px Poppins, sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "bottom";
+        ctx.fillText("#" + points[i], xCoords[i], yCoords[i] - 8);
+      }
     }
 
     // Modal Team Viewer with custom types
@@ -2418,7 +2500,7 @@
         
         return `
           <div class="modal-pkmn-card">
-            <img class="modal-pkmn-sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${match.id}.png" alt="PKMN">
+            <img class="modal-pkmn-sprite" src="https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/official-artwork/${match.id}.png" alt="PKMN">
             <h4 class="modal-pkmn-name">${pkmn.name}</h4>
             <div class="modal-pkmn-level">Level ${pkmn.lvl}</div>
             
@@ -2456,7 +2538,7 @@
       playSound("victory");
       
       document.getElementById("ceremony-name").textContent = trainer.name;
-      document.getElementById("ceremony-avatar").style.backgroundImage = `url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${trainer.avatarSeed}.png')`;
+      document.getElementById("ceremony-avatar").style.backgroundImage = `url('https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/official-artwork/${trainer.avatarSeed}.png')`;
 
       const overlay = document.getElementById("ceremony-overlay");
       overlay.style.display = "flex";

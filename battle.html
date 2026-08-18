@@ -1626,7 +1626,7 @@
         <!-- Player Pokémon HUD Card -->
         <div class="hud-status-card player-card">
           <div class="hud-avatar-frame" style="--border-color: var(--yellow);">
-            <img class="hud-pkmn-thumb" id="player-hud-sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="PKMN">
+            <img class="hud-pkmn-thumb" id="player-hud-sprite" src="https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/official-artwork/25.png" alt="PKMN">
           </div>
           <div class="hud-details-block">
             <div class="hud-name-row">
@@ -1636,7 +1636,7 @@
             <div class="hud-hp-bar-outer">
               <div class="hud-hp-bar-inner" id="player-hud-hp-fill" style="width: 83%;"></div>
             </div>
-            <div class="hud-hp-text"><span id="player-hud-hp-val">192</span> / 230 EXP</div>
+            <div class="hud-hp-text"><span id="player-hud-hp-val">192</span> / 230 HP</div>
             <div class="hud-xp-bar-outer">
               <div class="hud-xp-bar-inner" style="width: 60%;"></div>
             </div>
@@ -1661,7 +1661,7 @@
         <!-- Opponent Pokémon HUD Card -->
         <div class="hud-status-card opponent-card">
           <div class="hud-avatar-frame" style="--border-color: var(--red);">
-            <img class="hud-pkmn-thumb" id="opponent-hud-sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png" alt="PKMN">
+            <img class="hud-pkmn-thumb" id="opponent-hud-sprite" src="https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/official-artwork/6.png" alt="PKMN">
           </div>
           <div class="hud-details-block">
             <div class="hud-name-row">
@@ -1671,7 +1671,7 @@
             <div class="hud-hp-bar-outer">
               <div class="hud-hp-bar-inner" id="opponent-hud-hp-fill" style="width: 40%;"></div>
             </div>
-            <div class="hud-hp-text"><span id="opponent-hud-hp-val">98</span> / 240 EXP</div>
+            <div class="hud-hp-text"><span id="opponent-hud-hp-val">98</span> / 240 HP</div>
             <div class="hud-xp-bar-outer">
               <div class="hud-xp-bar-inner" style="width: 45%;"></div>
             </div>
@@ -1729,14 +1729,14 @@
           <div class="pedestal-neon-core"></div>
         </div>
         <div class="pkmn-shadow player-shadow"></div>
-        <img class="battle-pokemon-sprite player-pkmn" id="stage-player-sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="Player PKMN">
+        <img class="battle-pokemon-sprite player-pkmn" id="stage-player-sprite" src="https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/official-artwork/25.png" alt="Player PKMN">
 
         <!-- Opponent premium 3D platform (Merged flush into the lava floor) -->
         <div class="battle-pedestal-3d opponent-pedestal">
           <div class="pedestal-neon-core"></div>
         </div>
         <div class="pkmn-shadow opponent-shadow"></div>
-        <img class="battle-pokemon-sprite opponent-pkmn" id="stage-opponent-sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png" alt="Opponent PKMN">
+        <img class="battle-pokemon-sprite opponent-pkmn" id="stage-opponent-sprite" src="https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/official-artwork/6.png" alt="Opponent PKMN">
 
         <!-- Combat Effect Canvas Overlay for moves particles -->
         <canvas id="battle-animation-canvas" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10;"></canvas>
@@ -1855,6 +1855,37 @@
   </div>
 
   <script>
+    function getBaseHP(name) {
+      const cleanliness = (name || "").toLowerCase().trim();
+      const baseHPMap = {
+        "pikachu": 70,
+        "charizard": 76,
+        "garchomp": 120,
+        "lucario": 50,
+        "gardevoir": 62,
+        "zeraora": 42,
+        "blastoise": 90,
+        "venusaur": 100,
+        "gengar": 58,
+        "dragonite": 100,
+        "mewtwo": 110,
+        "lapras": 120
+      };
+      return baseHPMap[cleanliness] || 60;
+    }
+
+    function initializePokemonHP(pkmn, forceResetCurrentHP = false) {
+      if (!pkmn) return;
+      const lvl = pkmn.lvl || pkmn.level || pkmn.lvl || 50;
+      pkmn.baseHP = pkmn.baseHP || getBaseHP(pkmn.name);
+      pkmn.maxHp = pkmn.baseHP + (lvl * 2);
+      pkmn.maxHP = pkmn.maxHp;
+      if (forceResetCurrentHP || pkmn.hp === undefined || pkmn.hp === null) {
+        pkmn.hp = pkmn.maxHp;
+      }
+      pkmn.hp = Math.max(0, Math.min(pkmn.maxHp, pkmn.hp));
+    }
+
     // Exact list of 6 player Pokémon matching profile and reference
     // Performance Optimization DOM Cache & Preloader
     const domCache = {
@@ -1913,12 +1944,12 @@
       const pkmnList = typeof playerTeamData !== 'undefined' ? playerTeamData : [];
       pkmnList.forEach(p => {
         const img = new Image();
-        img.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${p.id}.png`;
+        img.src = `https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/official-artwork/${p.id}.png`;
       });
       const oppList = typeof opponentTeamData !== 'undefined' ? opponentTeamData : [];
       oppList.forEach(p => {
         const img = new Image();
-        img.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${p.id}.png`;
+        img.src = `https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/official-artwork/${p.id}.png`;
       });
       
       // Preload backgrounds
@@ -2115,6 +2146,8 @@
     let playerStatus = "paralysis"; // Initial status condition for testing Full Heal
 
     // Retrieve active combatants HP
+    playerTeamData.forEach(p => initializePokemonHP(p, true));
+    opponentTeamData.forEach(p => initializePokemonHP(p, true));
     let playerActiveHp = playerTeamData[0].hp;
     let opponentActiveHp = opponentTeamData[0].hp;
 
@@ -2284,7 +2317,7 @@
           : `border-color: rgba(255,255,255,0.08);`;
         return `
           <div class="team-member-card ${isActive}" style="${borderStyle}" onclick="triggerSwitchPokemon(${idx})">
-            <img class="team-member-avatar" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pkmn.id}.png" alt="${pkmn.name}">
+            <img class="team-member-avatar" src="https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/official-artwork/${pkmn.id}.png" alt="${pkmn.name}">
             <div class="team-member-name">${pkmn.name}</div>
             <div class="team-member-meta">
               <span class="team-member-lvl">Lv.${pkmn.lvl}</span>
@@ -2345,28 +2378,32 @@
       const pPkmn = playerTeamData[activePlayerPkmnIndex];
       const oPkmn = opponentTeamData[activeOpponentPkmnIndex];
 
+      if (pPkmn && oPkmn && oPkmn.lvl > pPkmn.lvl) {
+        oPkmn.lvl = pPkmn.lvl;
+      }
+
       // Update Player HUD details
       document.getElementById("player-hud-name").textContent = pPkmn.name;
       document.getElementById("player-hud-lvl").textContent = "Lv. " + pPkmn.lvl;
-      document.getElementById("player-hud-sprite").src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pPkmn.id}.png`;
+      document.getElementById("player-hud-sprite").src = `https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/official-artwork/${pPkmn.id}.png`;
       document.getElementById("player-hud-hp-val").textContent = playerActiveHp;
       
       const pHpPercent = Math.round((playerActiveHp / pPkmn.maxHp) * 100);
       document.getElementById("player-hud-hp-fill").style.width = pHpPercent + "%";
-      document.getElementById("stage-player-sprite").src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pPkmn.id}.png`;
+      document.getElementById("stage-player-sprite").src = `https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/official-artwork/${pPkmn.id}.png`;
       
 
 
       // Update Opponent HUD details
       document.getElementById("opponent-hud-name").textContent = oPkmn.name;
       document.getElementById("opponent-hud-lvl").textContent = "Lv. " + oPkmn.lvl;
-      document.getElementById("opponent-hud-sprite").src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${oPkmn.id}.png`;
+      document.getElementById("opponent-hud-sprite").src = `https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/official-artwork/${oPkmn.id}.png`;
       document.getElementById("opponent-hud-hp-val").textContent = opponentActiveHp;
 
       const oHpPercent = Math.round((opponentActiveHp / oPkmn.maxHp) * 100);
       document.getElementById("opponent-hud-hp-fill").style.width = oHpPercent + "%";
       document.getElementById("stage-opponent-sprite").style.opacity = opponentActiveHp > 0 ? "1" : "0";
-      document.getElementById("stage-opponent-sprite").src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${oPkmn.id}.png`;
+      document.getElementById("stage-opponent-sprite").src = `https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/official-artwork/${oPkmn.id}.png`;
     }
 
     // TRIGGER SWITCH POKEMON
@@ -2741,7 +2778,7 @@
           hp: 240,
           maxHp: 240,
           border: "#f97316",
-          sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png",
+          sprite: "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/official-artwork/6.png",
           moves: [
             { name: "Flamethrower", type: "Fire", pp: "15/15" },
             { name: "Air Slash", type: "Flying", pp: "20/20" },
@@ -2757,7 +2794,7 @@
           hp: 250,
           maxHp: 250,
           border: "#3b82f6",
-          sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/9.png",
+          sprite: "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/official-artwork/9.png",
           moves: [
             { name: "Hydro Pump", type: "Water", pp: "5/5" },
             { name: "Aqua Tail", type: "Water", pp: "10/10" },
@@ -2773,7 +2810,7 @@
           hp: 260,
           maxHp: 260,
           border: "#10b981",
-          sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/3.png",
+          sprite: "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/official-artwork/3.png",
           moves: [
             { name: "Solar Beam", type: "Grass", pp: "10/10" },
             { name: "Vine Whip", type: "Grass", pp: "25/25" },
@@ -2789,7 +2826,7 @@
           hp: 220,
           maxHp: 220,
           border: "#a855f7",
-          sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/94.png",
+          sprite: "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/official-artwork/94.png",
           moves: [
             { name: "Shadow Ball", type: "Ghost", pp: "15/15" },
             { name: "Dark Pulse", type: "Dark", pp: "15/15" },
@@ -2805,7 +2842,7 @@
           hp: 270,
           maxHp: 270,
           border: "#fbbf24",
-          sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/149.png",
+          sprite: "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/official-artwork/149.png",
           moves: [
             { name: "Dragon Rush", type: "Dragon", pp: "10/10" },
             { name: "Hurricane", type: "Flying", pp: "10/10" },
@@ -2821,7 +2858,7 @@
           hp: 290,
           maxHp: 290,
           border: "#ec4899",
-          sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/150.png",
+          sprite: "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/official-artwork/150.png",
           moves: [
             { name: "Psychic", type: "Psychic", pp: "10/10" },
             { name: "Aura Sphere", type: "Fighting", pp: "20/20" },
@@ -2837,7 +2874,7 @@
           hp: 280,
           maxHp: 280,
           border: "#38bdf8",
-          sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/131.png",
+          sprite: "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/official-artwork/131.png",
           moves: [
             { name: "Ice Beam", type: "Ice", pp: "10/10" },
             { name: "Hydro Pump", type: "Water", pp: "5/5" },
@@ -2857,13 +2894,23 @@
       }
 
       opponentTeamData[0] = JSON.parse(JSON.stringify(pkmn));
+      
+      let pLvl = 80;
+      if (typeof activePlayerPkmnIndex !== 'undefined' && playerTeamData && playerTeamData[activePlayerPkmnIndex]) {
+        pLvl = playerTeamData[activePlayerPkmnIndex].lvl || playerTeamData[activePlayerPkmnIndex].level || 80;
+      }
+      if (opponentTeamData[0].lvl > pLvl) {
+        opponentTeamData[0].lvl = pLvl;
+      }
+
+      initializePokemonHP(opponentTeamData[0], turnCount <= 7);
       opponentActiveHp = opponentTeamData[0].hp;
 
       const nameEl = document.getElementById("opponent-hud-name");
-      if (nameEl) nameEl.textContent = pkmn.name;
+      if (nameEl) nameEl.textContent = opponentTeamData[0].name;
 
       const lvlEl = document.getElementById("opponent-hud-lvl");
-      if (lvlEl) lvlEl.textContent = "Lv. " + pkmn.lvl;
+      if (lvlEl) lvlEl.textContent = "Lv. " + opponentTeamData[0].lvl;
 
       const spriteEl = document.getElementById("opponent-hud-sprite");
       if (spriteEl) spriteEl.src = pkmn.sprite;
@@ -2906,7 +2953,7 @@
           'night': 'Gengar'
         };
         const oppName = opponentMap[key];
-        if (oppName) {
+        if (oppName && turnCount <= 7) {
           selectOpponentPokemon(oppName);
         }
       }
@@ -3131,6 +3178,7 @@
     // Reset battle stats back to defaults
     function resetBattleGame() {
       if (!checkClickDebounce()) return;
+      turnCount = 7;
       // Hide modal
       document.getElementById("result-modal-overlay").style.display = "none";
       
@@ -3183,6 +3231,9 @@
     function dealDamage(amount, isToOpponent, isSuperEffective) {
       if (isToOpponent) {
         opponentActiveHp = Math.max(0, opponentActiveHp - amount);
+        if (opponentTeamData[activeOpponentPkmnIndex]) {
+          opponentTeamData[activeOpponentPkmnIndex].hp = opponentActiveHp;
+        }
         
         // Update HP fill smoothly
         const fill = document.getElementById("opponent-hud-hp-fill");

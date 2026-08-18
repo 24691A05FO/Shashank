@@ -1304,7 +1304,7 @@ footer.site-footer {
           <div class="type-tab-top"></div>
           <div class="card-media">
             <span class="num-chip">${numStr}</span>
-            <img src="${p.artwork}" alt="${p.name}" onerror="this.src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png'">
+            <img src="https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/official-artwork/${p.id}.png" alt="${p.name}" onerror="this.onerror=null; this.src='https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/' + p.id + '.png';">
           </div>
           <div class="card-body">
             <h3 class="poke-name">${p.name}</h3>
@@ -1364,7 +1364,7 @@ footer.site-footer {
       content.innerHTML = `
         <div class="modal-media-col">
           <span class="modal-num">#${String(p.id).padStart(3, '0')}</span>
-          <img src="${p.artwork}" alt="${p.name}" onerror="this.src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png'">
+          <img src="https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/official-artwork/${p.id}.png" alt="${p.name}" onerror="this.onerror=null; this.src='https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/${p.id}.png';">
           <div class="modal-bio-row">
             <div class="modal-bio-item"><span>Height</span><b>${p.height}</b></div>
             <div class="modal-bio-item"><span>Weight</span><b>${p.weight}</b></div>
